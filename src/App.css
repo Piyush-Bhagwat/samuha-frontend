@@ -263,7 +263,7 @@
 .input-area {
   display: flex;
   width: 100%;
-  background-color: var(--highlight-text);
+  background-color: var(--secondary-color);
   padding: 10px;
   bottom: 0;
   border-radius: 10px;
