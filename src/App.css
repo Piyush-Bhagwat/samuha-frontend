@@ -18,6 +18,7 @@
   --shadow: 0px 3px 3px #00000011;
   --text-color: #151515;
   --highlight-text: #fff;
+  --secondary-color: #8EACCD;
 }
 
 .App {
@@ -117,14 +118,14 @@
 .room-btn:hover {
   /* outline: 1px solid black; */
   background-color: #bacdf3;
-  color: #fff;
+  color: var(--highlight-text);
 
 
 }
 
 .room-active {
-  background-color: #8EACCD;
-  color: #fff;
+  background-color: var(--secondary-color);
+  color: var(--highlight-text);
   box-shadow: var(--shadow);
 }
 
@@ -153,11 +154,11 @@
 }
 
 .add-room button {
-  background-color: #8EACCD;
+  background-color: var(--highlight-text);
   border: none;
   border-radius: 10px;
   padding: 7px;
-  color: #fff;
+  color: var(--highlight-text);
 
 }
 
@@ -197,11 +198,11 @@
 .sm-btn {
   width: 40px;
   aspect-ratio: 1;
-  background-color: #8EACCD;
+  background-color: var(--highlight-text);
   border: 0;
   border-radius: 50%;
   box-shadow: var(--shadow);
-  color: #fff;
+  color: var(--highlight-text);
 }
 
 .message-card {
@@ -262,7 +263,7 @@
 .input-area {
   display: flex;
   width: 100%;
-  background-color: #8EACCD;
+  background-color: var(--highlight-text);
   padding: 10px;
   bottom: 0;
   border-radius: 10px;
@@ -271,8 +272,8 @@
 .input-box {
   padding: 9px 18px;
   width: 100%;
-  border: 1px solid #fff;
-  background-color: #fff;
+  border: 1px solid var(--background);
+  background-color: var(--background);
   border-radius: 20px;
   /* background: none; */
   outline: none;
@@ -283,7 +284,7 @@
 }
 
 .send-btn {
-  background-color: #fff;
+  background-color:var(--background);
   margin-left: 10px;
   height: 100%;
   aspect-ratio: 1;
