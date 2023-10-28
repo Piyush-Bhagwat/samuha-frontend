@@ -331,6 +331,14 @@
     z-index: 1;
   }
 
+  .login{
+    flex-direction: column;
+  }
+
+  .signup-card{
+    width: 50%;
+    padding: 10px;
+  }
   /* .nav-close-btn{
     position: fixed;
     top: 20px;

@@ -17,46 +17,49 @@ const Login = () => {
     };
 
     return (
-        <div className="login">
-            <div className="signup-card">
-                <h1>Sign Up</h1>
-                <input
-                    type="text"
-                    placeholder="userName"
-                    onChange={(e) => setUsername(e.target.value)}
-                    value={userName}
-                />
-                <input
-                    type="email"
-                    placeholder="email"
-                    onChange={(e) => setemail(e.target.value)}
-                    value={email}
-                />
-                <input
-                    type="text"
-                    placeholder="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button onClick={handleSignup}>Enter Room</button>
-            </div>
+        <div>
+            <h1 style={{textAlign: "center"}}>Samuha</h1>
+            <div className="login">
+                <div className="signup-card">
+                    <h1>Sign Up</h1>
+                    <input
+                        type="text"
+                        placeholder="userName"
+                        onChange={(e) => setUsername(e.target.value)}
+                        value={userName}
+                    />
+                    <input
+                        type="email"
+                        placeholder="email"
+                        onChange={(e) => setemail(e.target.value)}
+                        value={email}
+                    />
+                    <input
+                        type="text"
+                        placeholder="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button onClick={handleSignup}>Enter Room</button>
+                </div>
 
-            <div className="signup-card">
-                <h1>Login</h1>
-                <input
-                    type="email"
-                    placeholder="email"
-                    autoComplete="true"
-                    onChange={(e) => setemail(e.target.value)}
-                    value={email}
-                />
-                <input
-                    type="text"
-                    placeholder="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button onClick={handleLogin}>Enter Room</button>
+                <div className="signup-card">
+                    <h1>Login</h1>
+                    <input
+                        type="email"
+                        placeholder="email"
+                        autoComplete="true"
+                        onChange={(e) => setemail(e.target.value)}
+                        value={email}
+                    />
+                    <input
+                        type="text"
+                        placeholder="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <button onClick={handleLogin}>Enter Room</button>
+                </div>
             </div>
         </div>
     );
