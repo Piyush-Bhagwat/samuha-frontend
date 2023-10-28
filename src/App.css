@@ -1,38 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+:root {
+  --background: white;
+  --messageColor: #d9deeb;
+  --userMessageColor: #D2E0FB;
+  --dpColor: #D7E5CA;
+  --shadow: 0px 3px 3px #00000011;
+}
+
 .App {
-  text-align: center;
+  /* padding: 0.5% 2%; */
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* ------------------Login/signup-------------------------------------- */
+
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.signup-card {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 30vh;
+  justify-content: space-between;
+  padding: 1%;
+  margin: 1%;
+  background: var(--messageColor);
+  box-shadow: var(--shadow);
+  border-radius: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.signup-card input {
+  padding: 2%;
+  border-radius: 10px;
+  border: none;
+}
+
+.signup-card button {
+  width: fit-content;
+  padding: 3%;
+  background: #afe3f2;
+  border: none;
+  box-shadow: var(--shadow);
+  border-radius: 20px;
+}
+
+/* -------------------------------ChatRoom----------------------------- */
+
+
+.chat-room {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  background-color: var(--background);
+  border-radius: 10px;
+  justify-content: space-between;
+
+}
+
+.chats {
+  width: 100%;
+  height: 100vh;
+  padding: 0.4%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.rooms {
+  width: 25%;
+  background-color: var(--userMessageColor);
+  padding: 1% 2%;
+  padding-right: 0;
+  border-radius: 0 20px 0 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.room-card {
+  width: 100%;
+}
+
+.room-btn {
+  width: 100%;
+  cursor: pointer;
+  padding: 5% 3%;
+  text-align: left;
+  background: none;
+  margin: 5px 0;
+  border-radius: 20px 0px 0 20px;
+  border: none;
+  transition: .2s ease;
+}
+
+.room-btn:hover {
+  /* outline: 1px solid black; */
+  background-color: #bacdf3;
+  color: #fff;
+
+
+}
+
+.room-active {
+  background-color: #8EACCD;
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.room-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 3%;
+}
+
+
+.add-room {
+  display: flex;
+  left: 20%;
+  position: fixed;
+  flex-direction: column;
+
+}
+
+/* ---------------------messageing Area ---------------------------- */
+
+.message-container {
+  overflow-y: auto;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 1%;
+  flex-direction: column;
+}
+
+.chat-nav {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1%;
+  background-color: #D2E0FB;
+  border-radius: 20px;
+
+  box-shadow: var(--shadow);
+}
+
+.message-container::-webkit-scrollbar {
+  display: none;
+}
+
+.sm-btn {
+  width: 40px;
+  aspect-ratio: 1;
+  background-color: #8EACCD;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+  color: #fff;
+}
+
+.message-card {
+  align-self: self-start;
+  display: flex;
+  align-items: flex-end;
+}
+
+.msg-self {
+  align-self: self-end;
+
+}
+
+.message {
+  background-color: var(--messageColor);
+  padding: 8px 15px;
+  margin: 3px 0;
+  border-radius: 20px 20px 20px 4px;
+  min-width: 100px;
+  width: fit-content;
+  text-align: left;
+
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow)
+}
+
+.msg-self .message {
+  background-color: var(--userMessageColor);
+  border-radius: 20px 20px 4px 20px;
+}
+
+.time {
+  font-size: 0.7em;
+  align-self: flex-start;
+}
+
+.msg-self .time {
+  align-self: flex-end;
+}
+
+.message-card .user-name {
+  background-color: var(--dpColor);
+  width: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  font-size: 1.3em;
+  margin: 0 5px;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+
+}
+
+/* -----------------------Input Area-------------------- */
+
+.input-area {
+  display: flex;
+  width: 100%;
+  background-color: #8EACCD;
+  padding: 10px;
+  bottom: 0;
+  border-radius: 10px;
+}
+
+.input-box {
+  padding: 9px 18px;
+  width: 100%;
+  border: 1px solid #fff;
+  background-color: #fff;
+  border-radius: 20px;
+  /* background: none; */
+  outline: none;
+}
+
+.input-box:active {
+  outline: none;
+}
+
+.send-btn {
+  margin: 0 5px;
+  width: 15%;
+  border-radius: 20px;
+  border: none;
+}
+
+
+@media screen and (max-width: 450px) {
+  .rooms {
+    position: fixed;
+    /* margin: 20%; */
+    width: 50%;
+    padding-top: 50%;
+    top: 0;
+    left: -80%;
+    transition: 0.4s ease-in-out;
+    z-index: 10;
   }
-  to {
-    transform: rotate(360deg);
+
+  .rooms-active {
+    left: 0;
+    top: 0;
   }
+
+  .chats {
+    padding: 1% 3%;
+  }
+
+  .input-area {
+    position: fixed;
+    margin: 3%;
+    width: 94%;
+    z-index: 1;
+  }
+
+  /* .nav-close-btn{
+    position: fixed;
+    top: 20px;
+    left: 45%;
+  } */
 }
