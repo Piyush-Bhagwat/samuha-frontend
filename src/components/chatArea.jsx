@@ -9,8 +9,17 @@ const ChatArea = () => {
 
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
-    const { user, showNav, setUser, setShowNav, onMobile, messages, roomID, server, setRoomID } =
-        useContext(chatContext);
+    const {
+        user,
+        showNav,
+        setUser,
+        setShowNav,
+        onMobile,
+        messages,
+        roomID,
+        server,
+        setRoomID,
+    } = useContext(chatContext);
 
     useEffect(() => {
         setRoomID(id);
@@ -48,9 +57,18 @@ const ChatArea = () => {
     return (
         <div className="chats">
             <div className="chat-nav">
-            {onMobile && <button className="sm-btn" onClick={()=>setShowNav(!showNav)}>hi</button>}
+                {onMobile && (
+                    <button
+                        className="sm-btn"
+                        onClick={() => setShowNav(!showNav)}
+                    >
+                        <i className="fa-solid fa-bars"></i>
+                    </button>
+                )}
                 <h1>{user?.username}</h1>
-                <button className="sm-btn" onClick={handleLogout}><i className="fa-solid fa-right-from-bracket"></i></button>
+                <button className="sm-btn" onClick={handleLogout}>
+                    <i className="fa-solid fa-right-from-bracket"></i>
+                </button>
             </div>
 
             {renderMessages()}
@@ -64,8 +82,8 @@ const ChatArea = () => {
                         setMessage(e.target.value);
                     }}
                 />
-                <button className="send-btn" onClick={sendMessage}>
-                    send
+                <button className="sm-btn send-btn" onClick={sendMessage}>
+                <i className="fa-solid fa-play"></i>
                 </button>
             </div>
         </div>

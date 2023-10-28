@@ -69,14 +69,14 @@ const ChatRoom = () => {
     return (
         <div className="chat-room">
             <div className={`rooms ${showNav && "rooms-active"}`}>
-                    {showNav && (
-                        <button
-                            className="nav-close-btn"
-                            onClick={() => setShowNav(false)}
-                        >
-                            X
-                        </button>
-                    )}
+                {onMobile && (
+                    <button
+                        className="sm-btn"
+                        onClick={() => setShowNav(false)}
+                    >
+                        <i className="fa-solid fa-xmark"></i>
+                    </button>
+                )}
                 <div className="room-nav">
                     <h2>Rooms</h2>
 
@@ -93,31 +93,37 @@ const ChatRoom = () => {
                 </div>
                 {showAdd && (
                     <div className="add-room">
-                        <input
-                            type="text"
-                            className="code-input"
-                            value={roomCode}
-                            onChange={(e) => setRoomCode(e.target.value)}
-                            placeholder="Room Code"
-                        />
-                        <button onClick={handleJoin}>Join</button>
+                        <div>
+                            <h3>Join Room</h3>
+                            <input
+                                type="text"
+                                className="code-input"
+                                value={roomCode}
+                                onChange={(e) => setRoomCode(e.target.value)}
+                                placeholder="Room Code"
+                            />
+                            <button onClick={handleJoin}>Join</button>
+                        </div>
 
-                        <input
-                            type="text"
-                            className="code-input"
-                            value={roomName}
-                            onChange={(e) => setRoomName(e.target.value)}
-                            placeholder="Room Name"
-                        />
-                        <input
-                            type="text"
-                            className="code-input"
-                            value={roomCode}
-                            onChange={(e) => setRoomCode(e.target.value)}
-                            placeholder="Room Code"
-                        />
+                        <div>
+                            <h3>Create Room</h3>
+                            <input
+                                type="text"
+                                className="code-input"
+                                value={roomName}
+                                onChange={(e) => setRoomName(e.target.value)}
+                                placeholder="Room Name"
+                            />
+                            <input
+                                type="text"
+                                className="code-input"
+                                value={roomCode}
+                                onChange={(e) => setRoomCode(e.target.value)}
+                                placeholder="Room Code"
+                            />
 
-                        <button onClick={handleCreate}>Create</button>
+                            <button onClick={handleCreate}>Create</button>
+                        </div>
                     </div>
                 )}
                 {renderRooms()}

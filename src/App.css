@@ -6,6 +6,7 @@
   box-sizing: border-box;
 
   font-family: 'Montserrat', sans-serif;
+  color: var(--text-color);
 }
 
 
@@ -15,6 +16,8 @@
   --userMessageColor: #D2E0FB;
   --dpColor: #D7E5CA;
   --shadow: 0px 3px 3px #00000011;
+  --text-color: #151515;
+  --highlight-text: #fff;
 }
 
 .App {
@@ -135,11 +138,33 @@
 
 
 .add-room {
-  display: flex;
+  width: 15%;
+  height: 25vh;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 20px;
+  padding: 10px;
+  background-color: beige;
   left: 20%;
   position: fixed;
-  flex-direction: column;
+}
 
+.add-room button {
+  background-color: #8EACCD;
+  border: none;
+  border-radius: 10px;
+  padding: 7px;
+  color: #fff;
+
+}
+
+.add-room div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* ---------------------messageing Area ---------------------------- */
@@ -159,7 +184,7 @@
   width: 100%;
   justify-content: space-between;
   padding: 1%;
-  background-color: #D2E0FB;
+  background-color: var(--userMessageColor);
   border-radius: 20px;
 
   box-shadow: var(--shadow);
@@ -258,10 +283,12 @@
 }
 
 .send-btn {
-  margin: 0 5px;
-  width: 15%;
-  border-radius: 20px;
-  border: none;
+  background-color: #fff;
+  margin-left: 10px;
+  height: 100%;
+  aspect-ratio: 1;
+  color: var(--text-color);
+  font-size: 1.2em;
 }
 
 
@@ -282,8 +309,18 @@
     top: 0;
   }
 
+  .message-container {
+    padding-bottom: 18%;
+  }
+
   .chats {
     padding: 1% 3%;
+  }
+
+  .add-room {
+    width: 50%;
+    left: 10%;
+    top: 5%;
   }
 
   .input-area {
