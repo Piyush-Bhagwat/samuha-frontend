@@ -18,8 +18,8 @@ export default function ChatContextProvider(props) {
     const [canPlay, setCanPlay] = useState(true);
 
     const navigate = useNavigate();
-    const server = "http://localhost:5000";
-    // const server = "https://sahuma-backend.onrender.com";
+    // const server = "http://localhost:5000";
+    const server = "https://sahuma-backend.onrender.com";
 
     const onMobile = window.innerWidth < 450;
 
