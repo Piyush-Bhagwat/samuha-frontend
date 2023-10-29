@@ -15,6 +15,7 @@ export default function ChatContextProvider(props) {
     const [isUserAdmin, setUserAdmin] = useState(false);
 
     const [curRoomData, setCurRoomData] = useState(null);
+    const [canPlay, setCanPlay] = useState(false);
 
     const navigate = useNavigate();
     // const server = "http://localhost:5000";
@@ -36,21 +37,28 @@ export default function ChatContextProvider(props) {
         }
     };
 
+    window.addEventListener("click", () => {
+        console.log("clicke krta hai");
+        setCanPlay(true);
+    });
+
     const getUserRooms = async (userID) => {
         if (userID) {
             await axios
                 .get(`${server}/api/user/getRooms/?id=${userID}`)
                 .then((res) => {
-                    setRoomData(res.data);
+                    if(res.data !== "NaN"){
+                        setRoomData(res.data);
+                    }
                 });
 
-            navigate("/room/123456");
+            navigate("/room");
         }
     };
 
     const signUp = async (userName, email, password) => {
         axios
-            .post("http://localhost:5000/api/user/addUser", {
+            .post(`${server}/api/user/addUser`, {
                 username: userName,
                 email: email,
                 password: password,
@@ -127,11 +135,13 @@ export default function ChatContextProvider(props) {
         };
 
         socket?.on("roomUpdate", handleRoomUpdate);
+        console.log("mesages", messages);
 
         // Clean up the event listener before reattaching it
         return () => {
             socket?.off("roomUpdate", handleRoomUpdate);
         };
+
     }, [messages]);
 
     useEffect(() => {
@@ -145,11 +155,11 @@ export default function ChatContextProvider(props) {
         }
     }, [roomID]);
 
-    useEffect(()=>{
-        if(curRoomData){
-            setUserAdmin(curRoomData?.admin === user?._id)
+    useEffect(() => {
+        if (curRoomData) {
+            setUserAdmin(curRoomData?.adminID === user?._id);
         }
-    }, [curRoomData])
+    }, [curRoomData]);
 
     const value = {
         user,
@@ -161,6 +171,7 @@ export default function ChatContextProvider(props) {
         onMobile,
         isUserAdmin,
         showNav,
+        canPlay,
         curRoomData,
         setShowNav,
         getUserRooms,

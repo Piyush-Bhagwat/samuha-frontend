@@ -51,9 +51,10 @@ const ChatRoom = () => {
 
     const handleCreate = async () => {
         const data = {
-            code: roomCode,
+            code: roomCode.toLocaleLowerCase(),
             name: roomName,
-            admin: user._id,
+            adminID: user._id,
+            adminName: user.username,
             size: 0,
         };
         await axios.post(`${server}/api/room/createRoom`, data).then((res) => {

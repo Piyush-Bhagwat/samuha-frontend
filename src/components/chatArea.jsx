@@ -3,12 +3,14 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { chatContext } from "../context/chatContext";
 import axios from "axios";
 import Message from "./message";
+import audioFile from "../assets/audio/recived.mp3";
 
 const ChatArea = () => {
     const { id } = useParams();
 
     const container = useRef(null);
     const dummy = useRef(null);
+    const audioRef = useRef(null);
 
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
@@ -21,7 +23,7 @@ const ChatArea = () => {
         onMobile,
         curRoomData,
         messages,
-
+        canPlay,
         isUserAdmin,
         roomID,
         server,
@@ -34,6 +36,14 @@ const ChatArea = () => {
 
     useEffect(() => {
         dummy.current.scrollIntoView({ behavior: "smooth" });
+        if (canPlay && messages) {
+            if (messages[messages?.length - 1]?.userID !== user?._id) {
+                audioRef.current.muted = false;
+                audioRef.current.play();
+
+                console.log("has focus");
+            }
+        }
     }, [messages]);
 
     const sendMessage = async () => {
@@ -46,7 +56,6 @@ const ChatArea = () => {
             username: user?.username,
         };
         await axios.post(`${server}/api/msg/add`, msgData);
-
         setMessage("");
     };
 
@@ -58,6 +67,9 @@ const ChatArea = () => {
                 })}
 
                 <div className="dummy" ref={dummy}></div>
+                <audio ref={audioRef} muted="true" volume="0.5">
+                    <source src={audioFile} type="audio/mpeg" />
+                </audio>
             </div>
         );
     };
@@ -79,13 +91,21 @@ const ChatArea = () => {
                         <i className="fa-solid fa-bars"></i>
                     </button>
                 )}
-                <div onClick={() => {setRoomInfoVisible(!roomInfoVisible)}} className="room-name">
+                <div
+                    onClick={() => {
+                        setRoomInfoVisible(!roomInfoVisible);
+                    }}
+                    className="room-name"
+                >
                     {isUserAdmin && <i className="fa-solid fa-crown"></i>}
-                    <h1 >{curRoomData?.name}</h1>
+                    <h1>{curRoomData?.name}</h1>
 
-                    <div className={`room-info ${ roomInfoVisible && "room-info-active"}`}>
-                        Admin: "Piyush"
-                        code: {curRoomData?.code}
+                    <div
+                        className={`room-info ${
+                            roomInfoVisible && "room-info-active"
+                        }`}
+                    >
+                        Admin: {curRoomData?.adminName} code: {curRoomData?.code}
                     </div>
                 </div>
                 <button className="sm-btn" onClick={handleLogout}>
