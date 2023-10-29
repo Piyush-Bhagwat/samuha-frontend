@@ -35,7 +35,7 @@ const ChatArea = () => {
     }, [id]);
 
     useEffect(() => {
-        dummy.current.scrollIntoView({ behavior: "smooth" });
+        dummy.current?.scrollIntoView({ behavior: "smooth" });
         if (canPlay && messages) {
             if (messages[messages?.length - 1]?.userID !== user?._id) {
                 // audioRef.current.muted = false;
@@ -62,7 +62,7 @@ const ChatArea = () => {
 
     const renderMessages = () => {
         return (
-            <div className="message-container" ref={container}>
+            <>
                 {messages?.map((msg) => {
                     return <Message msg={msg} />;
                 })}
@@ -71,9 +71,16 @@ const ChatArea = () => {
                 <audio ref={audioRef} muted="true" volume="0.5">
                     <source src={audioFile} type="audio/mpeg" />
                 </audio>
-            </div>
+            </>
         );
     };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+          // If the Enter key is pressed, send the message
+          sendMessage();
+        }
+      };
 
     const handleLogout = async () => {
         navigate("/");
@@ -99,8 +106,11 @@ const ChatArea = () => {
                     className="room-name"
                 >
                     {isUserAdmin && <i className="fa-solid fa-crown"></i>}
-                    <h1>{curRoomData?.name}</h1>
-
+                    {roomID ? (
+                        <h1>{curRoomData?.name}</h1>
+                    ) : (
+                        <h1> {user?.username} </h1>
+                    )}
                     <div
                         className={`room-info ${
                             roomInfoVisible && "room-info-active"
@@ -114,9 +124,9 @@ const ChatArea = () => {
                     <i className="fa-solid fa-right-from-bracket"></i>
                 </button>
             </div>
-
-            {renderMessages()}
-
+            <div className="message-container" ref={container}>
+                {curRoomData ? renderMessages() : <h1> Select the room </h1>}
+            </div>
             <div className="input-area">
                 <input
                     type="text"
@@ -125,6 +135,8 @@ const ChatArea = () => {
                     onChange={(e) => {
                         setMessage(e.target.value);
                     }}
+
+                    onKeyDown={handleKeyPress}
                 />
                 <button className="sm-btn send-btn" onClick={sendMessage}>
                     <i className="fa-solid fa-play"></i>

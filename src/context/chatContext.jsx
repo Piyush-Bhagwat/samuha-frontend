@@ -15,11 +15,11 @@ export default function ChatContextProvider(props) {
     const [isUserAdmin, setUserAdmin] = useState(false);
 
     const [curRoomData, setCurRoomData] = useState(null);
-    const [canPlay, setCanPlay] = useState(false);
+    const [canPlay, setCanPlay] = useState(true);
 
     const navigate = useNavigate();
-    // const server = "http://localhost:5000";
-    const server = "https://sahuma-backend.onrender.com";
+    const server = "http://localhost:5000";
+    // const server = "https://sahuma-backend.onrender.com";
 
     const onMobile = window.innerWidth < 450;
 
@@ -37,17 +37,17 @@ export default function ChatContextProvider(props) {
         }
     };
 
-    window.addEventListener("click", () => {
-        console.log("clicke krta hai");
-        setCanPlay(true);
-    });
+    // window.addEventListener("click", () => {
+    //         console.log("clicke krtdda hai");
+    //         setCanPlay(true);
+    // }, {once: true});
 
     const getUserRooms = async (userID) => {
         if (userID) {
             await axios
                 .get(`${server}/api/user/getRooms/?id=${userID}`)
                 .then((res) => {
-                    if(res.data !== "NaN"){
+                    if (res.data !== "NaN") {
                         setRoomData(res.data);
                     }
                 });
@@ -141,7 +141,6 @@ export default function ChatContextProvider(props) {
         return () => {
             socket?.off("roomUpdate", handleRoomUpdate);
         };
-
     }, [messages]);
 
     useEffect(() => {
