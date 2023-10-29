@@ -38,10 +38,8 @@ const ChatArea = () => {
         dummy.current.scrollIntoView({ behavior: "smooth" });
         if (canPlay && messages) {
             if (messages[messages?.length - 1]?.userID !== user?._id) {
-                audioRef.current.muted = false;
-                audioRef.current.play();
-
-                console.log("has focus");
+                // audioRef.current.muted = false;
+                // audioRef.current.play();
             }
         }
     }, [messages]);
@@ -55,7 +53,10 @@ const ChatArea = () => {
             roomID: roomID,
             username: user?.username,
         };
-        await axios.post(`${server}/api/msg/add`, msgData);
+        await axios.post(`${server}/api/msg/add`, msgData).then(() => {
+            audioRef.current.muted = false;
+            audioRef.current.play();
+        });
         setMessage("");
     };
 
@@ -105,7 +106,8 @@ const ChatArea = () => {
                             roomInfoVisible && "room-info-active"
                         }`}
                     >
-                        Admin: {curRoomData?.adminName} code: {curRoomData?.code}
+                        Admin: {curRoomData?.adminName} code:{" "}
+                        {curRoomData?.code}
                     </div>
                 </div>
                 <button className="sm-btn" onClick={handleLogout}>
