@@ -12,6 +12,9 @@ export default function ChatContextProvider(props) {
     const [roomData, setRoomData] = useState(null);
     const [roomID, setRoomID] = useState(null);
     const [showNav, setShowNav] = useState(false);
+    const [isUserAdmin, setUserAdmin] = useState(false);
+
+    const [curRoomData, setCurRoomData] = useState(null);
 
     const navigate = useNavigate();
     // const server = "http://localhost:5000";
@@ -135,6 +138,19 @@ export default function ChatContextProvider(props) {
         getMessages();
     }, [roomID]);
 
+    useEffect(() => {
+        if (roomData) {
+            setCurRoomData(roomData?.find((room) => room.code === roomID));
+            console.log(roomData?.find((room) => room.code === roomID));
+        }
+    }, [roomID]);
+
+    useEffect(()=>{
+        if(curRoomData){
+            setUserAdmin(curRoomData?.admin === user?._id)
+        }
+    }, [curRoomData])
+
     const value = {
         user,
         messages,
@@ -143,7 +159,9 @@ export default function ChatContextProvider(props) {
         roomData,
         roomID,
         onMobile,
+        isUserAdmin,
         showNav,
+        curRoomData,
         setShowNav,
         getUserRooms,
         setRoomID,

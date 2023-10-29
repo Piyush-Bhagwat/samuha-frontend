@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { chatContext } from "../context/chatContext";
 import axios from "axios";
@@ -7,15 +7,22 @@ import Message from "./message";
 const ChatArea = () => {
     const { id } = useParams();
 
+    const container = useRef(null);
+    const dummy = useRef(null);
+
     const navigate = useNavigate();
     const [message, setMessage] = useState("");
+    const [roomInfoVisible, setRoomInfoVisible] = useState(false);
     const {
         user,
         showNav,
         setUser,
         setShowNav,
         onMobile,
+        curRoomData,
         messages,
+
+        isUserAdmin,
         roomID,
         server,
         setRoomID,
@@ -25,7 +32,12 @@ const ChatArea = () => {
         setRoomID(id);
     }, [id]);
 
+    useEffect(() => {
+        dummy.current.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
+
     const sendMessage = async () => {
+        if (message == "") return;
         const msgData = {
             message: message,
             time: Date.now(),
@@ -40,10 +52,12 @@ const ChatArea = () => {
 
     const renderMessages = () => {
         return (
-            <div className="message-container">
+            <div className="message-container" ref={container}>
                 {messages?.map((msg) => {
                     return <Message msg={msg} />;
                 })}
+
+                <div className="dummy" ref={dummy}></div>
             </div>
         );
     };
@@ -65,7 +79,15 @@ const ChatArea = () => {
                         <i className="fa-solid fa-bars"></i>
                     </button>
                 )}
-                <h1>{user?.username}</h1>
+                <div onClick={() => {setRoomInfoVisible(!roomInfoVisible)}} className="room-name">
+                    {isUserAdmin && <i className="fa-solid fa-crown"></i>}
+                    <h1 >{curRoomData?.name}</h1>
+
+                    <div className={`room-info ${ roomInfoVisible && "room-info-active"}`}>
+                        Admin: "Piyush"
+                        code: {curRoomData?.code}
+                    </div>
+                </div>
                 <button className="sm-btn" onClick={handleLogout}>
                     <i className="fa-solid fa-right-from-bracket"></i>
                 </button>
@@ -83,7 +105,7 @@ const ChatArea = () => {
                     }}
                 />
                 <button className="sm-btn send-btn" onClick={sendMessage}>
-                <i className="fa-solid fa-play"></i>
+                    <i className="fa-solid fa-play"></i>
                 </button>
             </div>
         </div>
