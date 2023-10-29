@@ -35,7 +35,7 @@ const ChatRoom = () => {
     const handleJoin = async () => {
         await axios
             .put(
-                `${server}/api/user/joinRoom/?userID=${user?._id}&roomID=${roomCode}`
+                `${server}/api/user/joinRoom/?userID=${user?._id}&roomID=${roomCode.toLowerCase()}`
             )
             .then((res) => {
                 if (res.data === "no-room") {
@@ -51,7 +51,7 @@ const ChatRoom = () => {
 
     const handleCreate = async () => {
         const data = {
-            code: roomCode.toLocaleLowerCase(),
+            code: roomCode.toLowerCase(),
             name: roomName,
             adminID: user._id,
             adminName: user.username,
