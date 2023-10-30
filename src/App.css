@@ -263,6 +263,10 @@ button {
   transition: 0.3s ease;
 }
 
+.room-info h3{
+  display: inline-block;
+}
+
 .room-info-active {
   transform: scale(1);
 

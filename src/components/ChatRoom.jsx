@@ -17,6 +17,7 @@ const ChatRoom = () => {
         server,
         getUserRooms,
     } = useContext(chatContext);
+
     const navigate = useNavigate();
     const [roomCode, setRoomCode] = useState("");
     const [roomName, setRoomName] = useState("");
@@ -101,9 +102,7 @@ const ChatRoom = () => {
                     </button>
                 )}
 
-                <div className="user-info">
-
-                </div>
+                <div className="user-info"></div>
 
                 <div className="room-nav">
                     <h2>Rooms</h2>

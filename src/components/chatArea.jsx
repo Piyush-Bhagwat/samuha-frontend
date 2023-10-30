@@ -4,6 +4,7 @@ import { chatContext } from "../context/chatContext";
 import axios from "axios";
 import Message from "./message";
 import audioFile from "../assets/audio/recived.mp3";
+import ChatInfo from "./chatInfo";
 
 const ChatArea = () => {
     const { id } = useParams();
@@ -97,10 +98,7 @@ const ChatArea = () => {
         <div className="chats">
             <div className="chat-nav">
                 {onMobile && (
-                    <button
-                        className="sm-btn"
-                        onClick={openNav}
-                    >
+                    <button className="sm-btn" onClick={openNav}>
                         <i className="fa-solid fa-bars"></i>
                     </button>
                 )}
@@ -116,14 +114,14 @@ const ChatArea = () => {
                     ) : (
                         <h1> {user?.username} </h1>
                     )}
-                    <div
-                        className={`room-info ${
-                            roomInfoVisible && "room-info-active"
-                        }`}
-                    >
-                        Admin: {curRoomData?.adminName} code:{" "}
-                        {curRoomData?.code}
-                    </div>
+
+                    <ChatInfo
+                        visible={roomInfoVisible}
+                        adminName={curRoomData?.adminName}
+                        members={curRoomData?.members}
+                        code={curRoomData?.code}
+                    />
+                    
                 </div>
                 <button className="sm-btn" onClick={handleLogout}>
                     <i className="fa-solid fa-right-from-bracket"></i>
@@ -133,21 +131,22 @@ const ChatArea = () => {
                 {curRoomData ? renderMessages() : <h1> Select the room </h1>}
             </div>
 
-            { roomID &&
-            <div className="input-area">
-                <input
-                    type="text"
-                    className="input-box"
-                    value={message}
-                    onChange={(e) => {
-                        setMessage(e.target.value);
-                    }}
-                    onKeyDown={handleKeyPress}
-                />
-                <button className="sm-btn send-btn" onClick={sendMessage}>
-                    <i className="fa-solid fa-play"></i>
-                </button>
-            </div>}
+            {roomID && (
+                <div className="input-area">
+                    <input
+                        type="text"
+                        className="input-box"
+                        value={message}
+                        onChange={(e) => {
+                            setMessage(e.target.value);
+                        }}
+                        onKeyDown={handleKeyPress}
+                    />
+                    <button className="sm-btn send-btn" onClick={sendMessage}>
+                        <i className="fa-solid fa-play"></i>
+                    </button>
+                </div>
+            )}
         </div>
     );
 };
