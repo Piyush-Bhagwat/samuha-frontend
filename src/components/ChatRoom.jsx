@@ -94,6 +94,7 @@ const ChatRoom = () => {
 
     return (
         <div className={`chat-room ${darkTheme && "dark"}`}>
+            <div className="background"></div>
             <div className={`rooms ${showNav && "rooms-active"}`} ref={navRef}>
                 {onMobile && (
                     <button

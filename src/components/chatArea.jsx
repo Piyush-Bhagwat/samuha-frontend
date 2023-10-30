@@ -18,7 +18,6 @@ const ChatArea = () => {
     const [roomInfoVisible, setRoomInfoVisible] = useState(false);
     const {
         user,
-        showNav,
         setUser,
         setShowNav,
         onMobile,
@@ -127,9 +126,14 @@ const ChatArea = () => {
                     <i className="fa-solid fa-right-from-bracket"></i>
                 </button>
             </div>
-            <div className="message-container" ref={container}>
-                {curRoomData ? renderMessages() : <h1> Select the room </h1>}
-            </div>
+
+                <div className="message-container" ref={container}>
+                    {curRoomData ? (
+                        renderMessages()
+                    ) : (
+                        <h1> Select the room </h1>
+                    )}
+                </div>
 
             {roomID && (
                 <div className="input-area">

@@ -97,8 +97,17 @@ button {
   display: flex;
   height: 100%;
   align-items: center;
-  background-color: var(--background);
+  /* background-color: var(--background); */
   justify-content: space-between;
+}
+
+.background{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: var(--background);
+  z-index: -2;
 }
 
 .rooms {
@@ -216,6 +225,10 @@ button {
 }
 
 /* ---------------------messageing Area ---------------------------- */
+/* .message-scroll{
+  height: 100%;
+  width: 100%;
+} */
 
 .message-container {
   overflow-y: scroll;
@@ -228,6 +241,10 @@ button {
   padding: 2% 1% 2%;
   scroll-behavior: smooth;
   flex-direction: column;
+}
+
+.message-container::-webkit-scrollbar {
+  display: none;
 }
 
 .chats {
@@ -281,10 +298,6 @@ button {
 .room-info-active {
   transform: scale(1);
 
-}
-
-.message-container::-webkit-scrollbar {
-  display: none;
 }
 
 .message-card {
@@ -354,7 +367,8 @@ button {
 .input-box {
   padding: 9px 18px;
   width: 100%;
-  border: 1px solid var(--background);
+  color: black;
+  border: none;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: var(--shadow);
