@@ -16,6 +16,8 @@ const ChatRoom = () => {
         roomData,
         server,
         getUserRooms,
+        setDarkTheme,
+        darkTheme,
     } = useContext(chatContext);
 
     const navigate = useNavigate();
@@ -91,7 +93,7 @@ const ChatRoom = () => {
     }, []);
 
     return (
-        <div className="chat-room">
+        <div className={`chat-room ${darkTheme && "dark"}`}>
             <div className={`rooms ${showNav && "rooms-active"}`} ref={navRef}>
                 {onMobile && (
                     <button
@@ -105,6 +107,15 @@ const ChatRoom = () => {
                 <div className="user-info"></div>
 
                 <div className="room-nav">
+                    <button
+                        className="sm-btn"
+                        onClick={() => {
+                            setDarkTheme((prev) => !prev);
+                        }}
+                    >
+                        {darkTheme ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>}
+                        
+                    </button>
                     <h2>Rooms</h2>
 
                     <button

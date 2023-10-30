@@ -13,6 +13,7 @@ export default function ChatContextProvider(props) {
     const [roomID, setRoomID] = useState(null);
     const [showNav, setShowNav] = useState(true);
     const [isUserAdmin, setUserAdmin] = useState(false);
+    const [darkTheme, setDarkTheme] = useState(null);
 
     const [curRoomData, setCurRoomData] = useState(null);
     const [canPlay, setCanPlay] = useState(true);
@@ -24,12 +25,11 @@ export default function ChatContextProvider(props) {
     const onMobile = window.innerWidth < 450;
 
     const getMessages = async () => {
-    
         if (roomID) {
             await axios
                 .get(`${server}/api/msg/getRoomMsg?id=${roomID}`)
                 .then((msg) => {
-                     setMessages(msg.data);
+                    setMessages(msg.data);
                 });
         } else {
             setMessages(null);
@@ -96,6 +96,8 @@ export default function ChatContextProvider(props) {
 
     useEffect(() => {
         const data = localStorage.getItem("user");
+        const theme = localStorage.getItem("theme");
+        if(theme) setDarkTheme(theme === "true")
         if (data) setUser(JSON.parse(data));
     }, []);
 
@@ -152,6 +154,10 @@ export default function ChatContextProvider(props) {
         }
     }, [curRoomData]);
 
+    useEffect(() => {
+        if(darkTheme !== null) localStorage.setItem("theme", darkTheme);
+    }, [darkTheme]);
+
     const value = {
         user,
         messages,
@@ -164,6 +170,8 @@ export default function ChatContextProvider(props) {
         showNav,
         canPlay,
         curRoomData,
+        darkTheme,
+        setDarkTheme,
         setShowNav,
         getUserRooms,
         setRoomID,

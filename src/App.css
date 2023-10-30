@@ -11,13 +11,23 @@
 
 :root {
   --background: white;
-  --messageColor: #d9deeb;
-  --userMessageColor: #D2E0FB;
-  --dpColor: #D7E5CA;
+  --greyColor: #d9deeb;
+  --lightBlue: #D2E0FB;
+  --greenColor: #D7E5CA;
   --shadow: 0px 3px 3px #00000011;
   --text-color: #151515;
   --highlight-text: #fff;
-  --secondary-color: #8EACCD;
+  --darkBlue: #8EACCD;
+}
+
+.dark{
+  --background: #404258 ;
+  --lightBlue: #6B728E;
+  --darkBlue: #474E68;
+  --greyColor: #727387;
+  --greenColor: #395B64;
+  --text-color: #ffffff;
+  --highlight-text: #f3f3f3;
 }
 
 button {
@@ -27,7 +37,7 @@ button {
 .sm-btn {
   width: 40px;
   aspect-ratio: 1;
-  background-color: var(--secondary-color);
+  background-color: var(--darkBlue);
   border: 0;
   border-radius: 50%;
   box-shadow: var(--shadow);
@@ -60,7 +70,7 @@ button {
   justify-content: space-between;
   padding: 1%;
   margin: 1%;
-  background: var(--messageColor);
+  background: var(--greyColor);
   box-shadow: var(--shadow);
   border-radius: 20px;
 }
@@ -74,7 +84,8 @@ button {
 .signup-card button {
   width: fit-content;
   padding: 3%;
-  background: #afe3f2;
+  background: var(--darkBlue);
+  color: var(--highlight-text);
   border: none;
   box-shadow: var(--shadow);
   border-radius: 20px;
@@ -87,13 +98,12 @@ button {
   height: 100%;
   align-items: center;
   background-color: var(--background);
-  border-radius: 10px;
   justify-content: space-between;
 }
 
 .rooms {
   width: 25%;
-  background-color: var(--userMessageColor);
+  background-color: var(--lightBlue);
   padding: 1% 2%;
   padding-right: 0;
   border-radius: 0 20px 0 0;
@@ -116,7 +126,7 @@ button {
 }
 
 .room-card:hover {
-  background-color: #9cb2df;
+  background-color: var(--darkBlue);
   color: var(--highlight-text);
 }
 
@@ -151,7 +161,7 @@ button {
 
 
 .room-active {
-  background-color: var(--secondary-color);
+  background-color: var(--darkBlue);
   color: var(--highlight-text);
   box-shadow: var(--shadow);
 }
@@ -161,6 +171,7 @@ button {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  margin: 5px 0;
   padding-right: 3%;
 }
 
@@ -172,17 +183,17 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-
+  box-shadow: var(--shadow);
   border-radius: 20px;
   padding: 10px;
-  background-color: beige;
-  left: 20%;
+  background-color: var(--lightBlue);
+  left: 21%;
   z-index: 50;
   position: fixed;
 }
 
 .add-room button {
-  background-color: var(--secondary-color);
+  background-color: var(--darkBlue);
   border: none;
   border-radius: 10px;
   padding: 7px;
@@ -234,7 +245,7 @@ button {
   width: 100%;
   justify-content: space-between;
   padding: 1%;
-  background-color: var(--userMessageColor);
+  background-color: var(--lightBlue);
   border-radius: 20px;
   box-shadow: var(--shadow);
 }
@@ -249,7 +260,7 @@ button {
   display: flex;
   width: 100%;
   height: fit-content;
-  background: var(--userMessageColor);
+  background: var(--lightBlue);
   align-items: center;
   position: absolute;
   padding: 10px;
@@ -287,7 +298,7 @@ button {
 }
 
 .message {
-  background-color: var(--messageColor);
+  background-color: var(--greyColor);
   padding: 8px 15px;
   margin: 3px 0;
   border-radius: 20px 20px 20px 4px;
@@ -301,7 +312,7 @@ button {
 }
 
 .msg-self .message {
-  background-color: var(--userMessageColor);
+  background-color: var(--lightBlue);
   border-radius: 20px 20px 4px 20px;
 }
 
@@ -315,7 +326,7 @@ button {
 }
 
 .message-card .user-name {
-  background-color: var(--dpColor);
+  background-color: var(--greenColor);
   width: 40px;
   border-radius: 50%;
   display: grid;
@@ -333,7 +344,7 @@ button {
 .input-area {
   display: flex;
   width: 100%;
-  background-color: var(--secondary-color);
+  background-color: var(--darkBlue);
   padding: 10px;
   bottom: 0;
   border-radius: 10px;
@@ -344,7 +355,7 @@ button {
   padding: 9px 18px;
   width: 100%;
   border: 1px solid var(--background);
-  background-color: var(--background);
+  background-color: #fff;
   border-radius: 20px;
   box-shadow: var(--shadow);
   outline: none;
@@ -382,6 +393,7 @@ button {
   .rooms-active {
     left: 0;
     top: 0;
+    box-shadow: 2px 0px 6px #00000037;
   }
 
   .message-container {

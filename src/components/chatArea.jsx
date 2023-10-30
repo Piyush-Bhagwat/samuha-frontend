@@ -61,6 +61,7 @@ const ChatArea = () => {
         };
         await axios.post(`${server}/api/msg/add`, msgData).then(() => {
             audioRef.current.muted = false;
+            audioRef.current.volume = 0.3;
             audioRef.current.play();
         });
         setMessage("");
@@ -74,7 +75,7 @@ const ChatArea = () => {
                 })}
 
                 <div className="dummy" ref={dummy}></div>
-                <audio ref={audioRef} muted="true" volume="0.5">
+                <audio ref={audioRef} muted="true">
                     <source src={audioFile} type="audio/mpeg" />
                 </audio>
             </>
@@ -121,7 +122,6 @@ const ChatArea = () => {
                         members={curRoomData?.members}
                         code={curRoomData?.code}
                     />
-                    
                 </div>
                 <button className="sm-btn" onClick={handleLogout}>
                     <i className="fa-solid fa-right-from-bracket"></i>
