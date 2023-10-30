@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { chatContext } from "../context/chatContext";
 import axios from "axios";
 import Message from "./message";
@@ -21,6 +21,7 @@ const ChatRoom = () => {
     const [roomCode, setRoomCode] = useState("");
     const [roomName, setRoomName] = useState("");
     const [showAdd, setShowAdd] = useState(false);
+    const navRef = useRef(null);
 
     const renderRooms = () => {
         return (
@@ -67,9 +68,24 @@ const ChatRoom = () => {
         });
     };
 
+    useEffect(() => {
+        const closeNavIfClickedOutside = (e) => {
+          if (showNav && navRef.current && !navRef.current.contains(e.target)) {
+            // If showNav is true and the click is outside the navigation menu, close the menu.
+            setShowNav(false);
+          }
+        };
+      
+        document.addEventListener('click', closeNavIfClickedOutside);
+      
+        return () => {
+          document.removeEventListener('click', closeNavIfClickedOutside);
+        };
+      }, []);
+
     return (
         <div className="chat-room">
-            <div className={`rooms ${showNav && "rooms-active"}`}>
+            <div className={`rooms ${showNav && "rooms-active"}`} ref={navRef}>
                 {onMobile && (
                     <button
                         className="sm-btn"

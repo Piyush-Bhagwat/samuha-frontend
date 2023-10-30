@@ -29,8 +29,7 @@ export default function ChatContextProvider(props) {
             await axios
                 .get(`${server}/api/msg/getRoomMsg?id=${roomID}`)
                 .then((msg) => {
-                    // console.log("actually got msg of room: ", (roomID));
-                    setMessages(msg.data);
+                     setMessages(msg.data);
                 });
         } else {
             setMessages(null);

@@ -44,6 +44,11 @@ const ChatArea = () => {
         }
     }, [messages]);
 
+    const openNav = (e) => {
+        e.stopPropagation();
+        setShowNav(true);
+    };
+
     const sendMessage = async () => {
         if (message == "") return;
         const msgData = {
@@ -76,11 +81,11 @@ const ChatArea = () => {
     };
 
     const handleKeyPress = (e) => {
-        if (e.key === 'Enter') {
-          // If the Enter key is pressed, send the message
-          sendMessage();
+        if (e.key === "Enter") {
+            // If the Enter key is pressed, send the message
+            sendMessage();
         }
-      };
+    };
 
     const handleLogout = async () => {
         navigate("/");
@@ -94,7 +99,7 @@ const ChatArea = () => {
                 {onMobile && (
                     <button
                         className="sm-btn"
-                        onClick={() => setShowNav(!showNav)}
+                        onClick={openNav}
                     >
                         <i className="fa-solid fa-bars"></i>
                     </button>
@@ -135,7 +140,6 @@ const ChatArea = () => {
                     onChange={(e) => {
                         setMessage(e.target.value);
                     }}
-
                     onKeyDown={handleKeyPress}
                 />
                 <button className="sm-btn send-btn" onClick={sendMessage}>
