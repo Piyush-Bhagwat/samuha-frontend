@@ -11,7 +11,7 @@ export default function ChatContextProvider(props) {
     const [socket, setSocket] = useState(null);
     const [roomData, setRoomData] = useState(null);
     const [roomID, setRoomID] = useState(null);
-    const [showNav, setShowNav] = useState(false);
+    const [showNav, setShowNav] = useState(true);
     const [isUserAdmin, setUserAdmin] = useState(false);
 
     const [curRoomData, setCurRoomData] = useState(null);
@@ -24,7 +24,7 @@ export default function ChatContextProvider(props) {
     const onMobile = window.innerWidth < 450;
 
     const getMessages = async () => {
-        console.log("from get MEssage", roomID);
+    
         if (roomID) {
             await axios
                 .get(`${server}/api/msg/getRoomMsg?id=${roomID}`)
@@ -57,7 +57,7 @@ export default function ChatContextProvider(props) {
 
     const signUp = async (userName, email, password) => {
         axios
-            .post(`${server}/api/user/addUser`, {
+            .post(`${server}/api/user/signUp`, {
                 username: userName,
                 email: email,
                 password: password,
@@ -65,8 +65,8 @@ export default function ChatContextProvider(props) {
             .then((id) => {
                 console.log("Signed Up: ", id.data);
 
-                if (id.data === "no-room") {
-                    alert("No room Found!");
+                if (id.data === "user-exist") {
+                    alert("Account already exist");
                 } else {
                     setUser(id.data);
                     localStorage.setItem("user", JSON.stringify(id.data));
@@ -87,8 +87,6 @@ export default function ChatContextProvider(props) {
                     return;
                 } else {
                     setUser(res.data);
-                    // userData = res.data;
-                    console.log(res.data);
                     getUserRooms(res.data?._id);
                     localStorage.setItem("user", JSON.stringify(res.data));
                     navigate("/room");
@@ -119,7 +117,6 @@ export default function ChatContextProvider(props) {
 
     useEffect(() => {
         if (user) {
-            console.log("ueser got");
             getUserRooms(user?._id);
             navigate("/room");
         }
@@ -128,13 +125,10 @@ export default function ChatContextProvider(props) {
     useEffect(() => {
         //watching changes in database
         const handleRoomUpdate = async () => {
-            console.log("Update zala re!!!!!!!!!");
-
             await getMessages();
         };
 
         socket?.on("roomUpdate", handleRoomUpdate);
-        console.log("mesages", messages);
 
         // Clean up the event listener before reattaching it
         return () => {
@@ -149,7 +143,6 @@ export default function ChatContextProvider(props) {
     useEffect(() => {
         if (roomData) {
             setCurRoomData(roomData?.find((room) => room.code === roomID));
-            console.log(roomData?.find((room) => room.code === roomID));
         }
     }, [roomID]);
 

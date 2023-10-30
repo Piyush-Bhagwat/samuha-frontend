@@ -132,6 +132,8 @@ const ChatArea = () => {
             <div className="message-container" ref={container}>
                 {curRoomData ? renderMessages() : <h1> Select the room </h1>}
             </div>
+
+            { roomID &&
             <div className="input-area">
                 <input
                     type="text"
@@ -145,7 +147,7 @@ const ChatArea = () => {
                 <button className="sm-btn send-btn" onClick={sendMessage}>
                     <i className="fa-solid fa-play"></i>
                 </button>
-            </div>
+            </div>}
         </div>
     );
 };

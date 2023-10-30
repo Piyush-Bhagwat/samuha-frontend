@@ -26,8 +26,8 @@ const ChatRoom = () => {
     const renderRooms = () => {
         return (
             <>
-                {roomData?.map((room) => {
-                    return <RoomCard room={room} />;
+                {roomData?.map((room, id) => {
+                    return <RoomCard room={room} key={id} />;
                 })}
             </>
         );
@@ -36,7 +36,9 @@ const ChatRoom = () => {
     const handleJoin = async () => {
         await axios
             .put(
-                `${server}/api/user/joinRoom/?userID=${user?._id}&roomID=${roomCode.toLowerCase()}`
+                `${server}/api/user/joinRoom/?userID=${
+                    user?._id
+                }&roomID=${roomCode.toLowerCase()}`
             )
             .then((res) => {
                 if (res.data === "no-room") {
@@ -70,18 +72,22 @@ const ChatRoom = () => {
 
     useEffect(() => {
         const closeNavIfClickedOutside = (e) => {
-          if (showNav && navRef.current && !navRef.current.contains(e.target)) {
-            // If showNav is true and the click is outside the navigation menu, close the menu.
-            setShowNav(false);
-          }
+            if (
+                showNav &&
+                navRef.current &&
+                !navRef.current.contains(e.target)
+            ) {
+                // If showNav is true and the click is outside the navigation menu, close the menu.
+                setShowNav(false);
+            }
         };
-      
-        document.addEventListener('click', closeNavIfClickedOutside);
-      
+
+        document.addEventListener("click", closeNavIfClickedOutside);
+
         return () => {
-          document.removeEventListener('click', closeNavIfClickedOutside);
+            document.removeEventListener("click", closeNavIfClickedOutside);
         };
-      }, []);
+    }, []);
 
     return (
         <div className="chat-room">
@@ -94,6 +100,11 @@ const ChatRoom = () => {
                         <i className="fa-solid fa-xmark"></i>
                     </button>
                 )}
+
+                <div className="user-info">
+
+                </div>
+
                 <div className="room-nav">
                     <h2>Rooms</h2>
 
