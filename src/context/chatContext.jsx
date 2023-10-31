@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import io from "socket.io-client";
 
 export const chatContext = createContext(null);
@@ -66,7 +67,16 @@ export default function ChatContextProvider(props) {
                 console.log("Signed Up: ", id.data);
 
                 if (id.data === "user-exist") {
-                    alert("Account already exist");
+                    toast.error('Account Exist, Try to login', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: (darkTheme ? "dark" : "light"),
+                        });
                 } else {
                     setUser(id.data);
                     localStorage.setItem("user", JSON.stringify(id.data));
@@ -83,13 +93,32 @@ export default function ChatContextProvider(props) {
             )
             .then((res) => {
                 if (res.data === "no-user") {
-                    alert("Enter correct password nd email");
+                    toast.error('Wrong password or email', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: (darkTheme ? "dark" : "light"),
+                        });
                     return;
                 } else {
                     setUser(res.data);
                     getUserRooms(res.data?._id);
                     localStorage.setItem("user", JSON.stringify(res.data));
                     navigate("/room");
+                    toast.success('Logged In', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: (darkTheme ? "dark" : "light"),
+                        });
                 }
             });
     };

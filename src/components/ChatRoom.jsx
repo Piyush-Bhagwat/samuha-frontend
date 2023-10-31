@@ -5,6 +5,7 @@ import Message from "./message";
 import { useNavigate } from "react-router-dom";
 import RoomCard from "./roomCard";
 import ChatArea from "./chatArea";
+import { toast } from "react-toastify";
 // const socket = io.connect("http://localhost:5000/");
 
 const ChatRoom = () => {
@@ -45,12 +46,31 @@ const ChatRoom = () => {
             )
             .then((res) => {
                 if (res.data === "no-room") {
-                    alert("Room not found");
+                    toast.error("Room Not Found", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: darkTheme ? "dark" : "light",
+                    });
                 } else {
                     console.log("Joint");
                     getUserRooms(user?._id);
                     setShowAdd(false);
                     navigate(`/room/${roomCode}`);
+                    toast.info("Room Joint", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: darkTheme ? "dark" : "light",
+                    });
                 }
             });
     };
@@ -68,7 +88,16 @@ const ChatRoom = () => {
                 console.log("RoomCreated");
                 handleJoin();
             } else {
-                alert("something went wrong");
+                toast.error("Someting went wrong", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: darkTheme ? "dark" : "light",
+                });
             }
         });
     };
@@ -114,8 +143,11 @@ const ChatRoom = () => {
                             setDarkTheme((prev) => !prev);
                         }}
                     >
-                        {darkTheme ? <i className="fa-solid fa-sun"></i> : <i className="fa-solid fa-moon"></i>}
-                        
+                        {darkTheme ? (
+                            <i className="fa-solid fa-sun"></i>
+                        ) : (
+                            <i className="fa-solid fa-moon"></i>
+                        )}
                     </button>
                     <h2>Rooms</h2>
 
